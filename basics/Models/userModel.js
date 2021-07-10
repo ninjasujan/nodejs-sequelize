@@ -1,7 +1,7 @@
-const Sequelize = require("sequelize/types");
+const Sequelize = require("sequelize");
 const sequelize = require("../db/connection");
 
-module.exports = sequelize.define("Tweet", {
+module.exports = sequelize.define("users", {
   _id: {
     type: Sequelize.INTEGER(11),
     allowNull: false,
