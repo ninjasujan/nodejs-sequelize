@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../db/connection");
 
-module.exports = sequelize.define(
+const Tweet = sequelize.define(
   "tweets",
   {
     _id: {
@@ -12,5 +12,17 @@ module.exports = sequelize.define(
     },
     content: Sequelize.STRING(300),
   },
-  {}
+  {
+    timestamps: true,
+  }
 );
+
+Tweet.associate = (models) => {
+  Tweet.belongsTo(models.users);
+};
+
+Tweet.associate = (models) => {
+  Tweet.belongsToMany(models.tags, { through: "tweet_tag" });
+};
+
+module.exports = tweets;

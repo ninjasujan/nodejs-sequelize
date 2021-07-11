@@ -2,21 +2,24 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    return queryInterface.createTable("tweets", {
+    queryInterface.createTable("tags", {
       _id: {
         type: Sequelize.INTEGER(11),
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
       },
-      content: Sequelize.STRING(300),
-      userId: Sequelize.INTEGER(11),
+      tagName: {
+        type: Sequelize.STRING(35),
+        allowNull: false,
+        unique: true,
+      },
       createdAt: Sequelize.DATE,
       updatedAt: Sequelize.DATE,
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("tweets");
+    await queryInterface.dropTable("tags");
   },
 };
