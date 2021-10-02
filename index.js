@@ -3,14 +3,14 @@ const app = express();
 const { json } = require("body-parser");
 require("dotenv").config();
 const cors = require("cors");
-const router = require("./routes/tweet.router");
+// const router = require("./routes/tweet.router");
 require("./db/connection");
 // require("./db/association");
 
 app.use(json());
 app.use(cors());
 
-app.use("/api", router);
+// app.use("/api", router);
 
 app.use((err, req, res, next) => {
 	console.log(err);

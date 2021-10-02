@@ -1,8 +1,8 @@
 const Sequelize = require("sequelize");
 const sequelize = require("../db/connection");
 
-const Subscription = sequelize.define(
-	"Subscription",
+const Company = sequelize.define(
+	"Company",
 	{
 		_id: {
 			type: Sequelize.INTEGER(11),
@@ -10,27 +10,23 @@ const Subscription = sequelize.define(
 			autoIncrement: true,
 			primaryKey: true,
 		},
-		userId: {
-			type: Sequelize.INTEGER(11),
-			reference: {
-				model: "User",
-				key: "_id",
-			},
-			onDelete: "CASCADE",
+		name: {
+			type: Sequelize.STRING(30),
+			allowNull: false,
 		},
-		productId: {
+		localtion: {
 			type: Sequelize.STRING(35),
 			allowNull: false,
 		},
-		purchaseToken: {
-			type: Sequelize.STRING,
+		type: {
+			type: Sequelize.ENUM("MNC", "STARTUP"),
 			allowNull: false,
 		},
 	},
 	{
 		classMethods: {
 			associate: function (models) {
-				Subscription.belongsTo(models.User);
+				Company.hasMany(models.User);
 			},
 		},
 	},
@@ -39,4 +35,4 @@ const Subscription = sequelize.define(
 	}
 );
 
-module.exports = Subscription;
+module.exports = Company;

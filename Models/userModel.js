@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 const sequelize = require("../db/connection");
 
 const User = sequelize.define(
-	"users",
+	"User",
 	{
 		_id: {
 			type: Sequelize.INTEGER(11),
@@ -15,22 +15,27 @@ const User = sequelize.define(
 			allowNull: false,
 			unique: true,
 		},
+		email: {
+			type: Sequelize.STRING,
+			allowNull: false,
+		},
 		password: {
 			type: Sequelize.STRING(20),
 			allowNull: false,
 		},
 	},
 	{
+		classMethods: {
+			associate: function (models) {
+				User.hasMany(models.Subscription);
+				User.belongsTo(models.Company);
+				User.belongsToMany(models.Project);
+			},
+		},
+	},
+	{
 		timestamps: true,
 	}
 );
-
-User.associate = (models) => {
-	User.hasMany(models.tweets);
-};
-
-User.associate = (models) => {
-	User.hasOne(models.subscriptions);
-};
 
 module.exports = User;

@@ -2,20 +2,15 @@
 
 module.exports = {
 	up: async (queryInterface, Sequelize) => {
-		await queryInterface.createTable("Subscription", {
+		await queryInterface.createTable("Project", {
 			_id: {
 				type: Sequelize.INTEGER(11),
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 			},
-			productId: {
+			title: {
 				type: Sequelize.STRING(35),
-				allowNull: false,
-				unique: true,
-			},
-			purchaseToken: {
-				type: Sequelize.STRING(20),
 				allowNull: false,
 			},
 			createdAt: Sequelize.DATE,
@@ -24,6 +19,6 @@ module.exports = {
 	},
 
 	down: async (queryInterface, Sequelize) => {
-		await queryInterface.dropTable("Subscription");
+		await queryInterface.dropTable("Project");
 	},
 };
